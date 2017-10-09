@@ -18,7 +18,7 @@ hFig = figure(); clf;
 set(hFig, 'Position', [10 10 2048 1024], 'Color', [1 1 1]);
 
 % Show the mesh and and the density contours but do not label the cones
-ax = subplot('Position', [0.03 0.05 0.45 0.94]);
+ax = subplot('Position', [0.04 0.05 0.45 0.94]);
 % Visualize the inner segment
 visualizedAperture = 'lightCollectingArea';
 
@@ -40,7 +40,7 @@ set(ax, 'XLim', XYLims, 'YLim', XYLims, ...
          'FontSize', 18, 'LineWidth', 1.5);
 
 % Label the cones, plot on dark background, show outer-segment for better visibility
-ax = subplot('Position', [0.52 0.05 0.45 0.94]);
+ax = subplot('Position', [0.53 0.05 0.45 0.94]);
 % Visualize the the outer-segment
 visualizedAperture = 'geometricArea';
 backgroundColor = [0.8 0.8 0.8];
