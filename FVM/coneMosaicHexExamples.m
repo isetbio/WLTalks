@@ -19,9 +19,11 @@ mosaicParams = struct(...
 % 360 seconds
 lowQuality.tolerance1 = 0.01*10;
 lowQuality.tolerance2 = 0.001*10;
-lowQuality.marginF = 1.3;
+lowQuality.marginF = 1.0;
 lowQuality.mosaicFileName = 'lowQMosaic.mat';
 lowQuality.saveMosaic = true;
+
+qParams = lowQuality;
 
 theHexMosaic = coneMosaicHex(mosaicParams.resamplingFactor, ...
     'name', mosaicParams.name, ...
