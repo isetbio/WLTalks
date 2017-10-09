@@ -1,5 +1,5 @@
 function visualizeExtantMosaic()
-%% Visualize a previously saved mosaic
+%% Visualize a previously saved mosaic and its activation to a ring rays stimulus
 %
 
 % Select mosaic file to visualize
@@ -63,6 +63,21 @@ if (exportAsPDF)
 NicePlot.exportFigToPDF('mosaic.pdf', hFig, 300);
 end
 
+
+%% Compute isomerizations to a simple stimulus
+% Generate ring rays stimulus
+scene = sceneCreate('rings rays');
+scene = sceneSet(scene,'fov', 1.0);
+    
+% Compute the optical image
+oi = oiCreate;
+oi = oiCompute(scene,oi);  
+
+% Compute isomerizations
+isomerizationsHex = theHexMosaic.compute(oi,'currentFlag',false);
+
+% Visualize activation using the GUI method
+theHexMosaic.window;
 end
 
 
