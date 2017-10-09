@@ -77,7 +77,17 @@ oi = oiCompute(scene,oi);
 isomerizationsHex = theHexMosaic.compute(oi,'currentFlag',false);
 
 % Visualize activation using the GUI method
-theHexMosaic.window;
+%theHexMosaic.window;
+
+% Visualize using the @coneMosaicHex routine
+theHexMosaic.visualizeActivationMaps(...
+    isomerizationsHex, ...                                          % the response
+    'mapType', 'modulated hexagons', ...                            % how to display cones: choose between 'density plot', 'modulated disks' and 'modulated hexagons'
+    'signalName', 'isomerizations (R*/cone/integration time)', ...  % colormap title (signal name and units)
+    'colorMap', hot(1024), ...                                      % colormap to use for displaying activation level
+    'figureSize', [1650 1200] ...                                   % figure size in pixels
+    );
+
 end
 
 
