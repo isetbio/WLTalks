@@ -1,4 +1,7 @@
 %% Make a 1 deg hex cone mosaic image
+%
+% I should clear the image before saving, I guess.
+% Name the mosaic file
 
 ieInit; clear; close all;
 
@@ -34,3 +37,4 @@ theHexMosaic = coneMosaicHex(mosaicParams.resamplingFactor, ...
 toc
 
 %%
+save(fullfile(userpath,'WLTalks','FVM','coneMosaicHexOneDeg'),'theHexMosaic');
