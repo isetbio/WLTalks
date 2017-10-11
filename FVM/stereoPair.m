@@ -6,14 +6,20 @@ chdir(fullfile(wltalksRootPath,'FVM'));
 
 ieInit;
 
-%%
+%% I chose the crop to center on the pawn
+
 load('rtbBinocular_DOF/rtbBinocular_DOF_Left','oi');
+ieAddObject(oi); oiWindow;
+
+%%
+
+rect = [245   184   224   224];
+
 oiLeft = oi;
 oiLeft = oiSet(oiLeft,'illuminance',oiCalculateIlluminance(oiLeft));
 oiLeft = oiSet(oiLeft,'mean illuminance',10);
 oiGet(oiLeft,'mean illuminance')
 
-rect = [245   184   197   251];
 oiLeft = oiCrop(oiLeft,rect);
 ieAddObject(oiLeft); oiWindow;
 
@@ -23,34 +29,31 @@ oiRight = oiSet(oiRight,'illuminance',oiCalculateIlluminance(oiRight));
 oiRight = oiSet(oiRight,'mean illuminance',10);
 oiGet(oiRight,'mean illuminance')
 
-rect = [245   184   197   251];
 oiRight = oiCrop(oiRight,rect);
 % oiRight = oiSet(oiRight,'hfov',fov);
 ieAddObject(oiRight); oiWindow;
 
-%%  Can we build the mosaic at some eccentricity and view a smaller patch?
+%%  Here we build a mosaic at some eccentricity deg 
 
-% Here is a kind of big (almost 2K x 2K) mosaic
-% cMosaic = coneMosaic;
-% cMosaic.setSizeToFOV(12);
-% cMosaic.emGenSequence(50);
-% cMosaic.compute(oiLeft);
-% cMosaic.window;
+% The number of cones depends on the eccentricity because the aperture
+% grows with eccentricity.  We should plot that function as part of
+% this tutorial.
 
-%%  Here we build a mosaic at 5 deg 
-
-deg = 2; center = [0 0.0003]*deg;   
-
+deg = 1; center = [0 0.0003]*deg;   
+fov = 7;
 cMosaicLeft = coneMosaic('center',center);
-cMosaicLeft.setSizeToFOV(10);
+cMosaicLeft.setSizeToFOV(fov);
 cMosaicLeft.name = sprintf('Chess-left-%d',deg);
 
 cMosaicLeft.emGenSequence(100);
 cMosaicLeft.compute(oiLeft);
 cMosaicLeft.window;
 
-%%
+%% Now the right.
+
 cMosaicRight = coneMosaic('center',center);
+cMosaicRight.setSizeToFOV(fov);
+
 cMosaicRight.emGenSequence(100);
 cMosaicRight.compute(oiRight);
 cMosaicRight.name = sprintf('Chess-right-%d',deg);
